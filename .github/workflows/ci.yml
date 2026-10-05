@@ -1,0 +1,17 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
+        with:
+          repository: HUG-thefuture/campus-study-agent
+          path: campus-study-agent
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - run: pip install -r campus-study-agent/requirements.txt
+      - run: python eval_runner.py
+      - run: python eval_runner.py --ab
